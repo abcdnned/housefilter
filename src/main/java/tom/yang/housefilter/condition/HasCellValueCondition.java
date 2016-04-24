@@ -1,5 +1,9 @@
 package tom.yang.housefilter.condition;
 
+import java.util.List;
+
+import tom.yang.housefilter.core.ConditionContext;
+import tom.yang.housefilter.core.HouseCell;
 import tom.yang.housefilter.core.HouseRow;
 
 public class HasCellValueCondition implements WeightCondition {
@@ -14,8 +18,15 @@ public class HasCellValueCondition implements WeightCondition {
 	}
 
 	@Override
-	public boolean match(final HouseRow rowContext) {
-		return rowContext.getCells().stream().anyMatch(cell->cell.equals(condition));
+	public boolean match(ConditionContext context) {
+		HouseRow row = context.getRow();
+		if (row != null) {
+			List<HouseCell> cells = row.getCells();
+			if (cells != null) {
+				return cells.stream().anyMatch(cell -> cell.getValue().equals(condition));
+			}
+		}
+		return false;
 	}
 
 }

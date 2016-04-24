@@ -16,12 +16,9 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import tom.yang.housefilter.rowfilter.IHouseRowFilter;
 
 public class RowProvider {
-	private static final String XLS_SUFFIX=".xls";
-	private static final String XLSX_SUFFIX=".xlsx";
+	private final File file;
 
 	private final List<IHouseRowFilter> filters=new ArrayList<IHouseRowFilter>();
-
-	private final File file;
 
 	public RowProvider(final File file){
 		if(file==null){
@@ -51,7 +48,11 @@ public class RowProvider {
 			for(final Row row:sheet){
 				final HouseRow hr=new HouseRow();
 				for(final Cell cell:row){
-					hr.getCells().add(cell.getStringCellValue());
+					cell.getColumnIndex();
+					HouseCell hc = new HouseCell();
+					hc.setCol(cell.getColumnIndex());
+					hc.setValue(cell.getStringCellValue());
+					hr.getCells().add(hc);
 				}
 				if(hr.getCells().size()>0){
 					if(filters.size()>0){

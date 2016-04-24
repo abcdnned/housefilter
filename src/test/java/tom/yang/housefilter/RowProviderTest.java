@@ -20,36 +20,6 @@ public class RowProviderTest {
 	public ExpectedException thrown= ExpectedException.none();
 
 	@Test
-	public void testProvideRow(){
-		final RowProvider provider=new RowProvider(new File("file"));
-
-		final XSSFWorkbook wb=new XSSFWorkbook();
-		final Sheet sheet1=wb.createSheet("sheet1");
-		for(int i=0;i<3;i++){
-			final Row row = sheet1.createRow(i);
-			row.createCell(0).setCellValue("k"+i);
-			row.createCell(1).setCellValue("v"+i);
-		}
-		final List<HouseRow> rows=provider.parseRows(wb);
-
-		Assert.assertEquals(3, rows.size());
-
-		for(int i=0;i<rows.size();++i){
-			Assert.assertEquals("k"+i,rows.get(i).getCells().get(0));
-			Assert.assertEquals("v"+i,rows.get(i).getCells().get(1));
-		}
-	}
-
-
-	@Test
-	public void testNullWorkbook(){
-		thrown.expect(IllegalArgumentException.class);
-
-		final RowProvider provider=new RowProvider(new File("file"));
-		provider.parseRows(null);
-	}
-
-	@Test
 	public void testFilterRow(){
 		final RowProvider provider=new RowProvider(new File("file"));
 
@@ -70,7 +40,37 @@ public class RowProviderTest {
 		final List<HouseRow> rows=provider.parseRows(wb);
 		Assert.assertEquals(1, rows.size());
 
-		Assert.assertEquals("123",rows.get(0).getCells().get(0));
-		Assert.assertEquals("value",rows.get(0).getCells().get(1));
+		Assert.assertEquals("123",rows.get(0).getCells().get(0).getValue());
+		Assert.assertEquals("value",rows.get(0).getCells().get(1).getValue());
+	}
+
+
+	@Test
+	public void testNullWorkbook(){
+		thrown.expect(IllegalArgumentException.class);
+
+		final RowProvider provider=new RowProvider(new File("file"));
+		provider.parseRows(null);
+	}
+
+	@Test
+	public void testProvideRow(){
+		final RowProvider provider=new RowProvider(new File("file"));
+
+		final XSSFWorkbook wb=new XSSFWorkbook();
+		final Sheet sheet1=wb.createSheet("sheet1");
+		for(int i=0;i<3;i++){
+			final Row row = sheet1.createRow(i);
+			row.createCell(0).setCellValue("k"+i);
+			row.createCell(1).setCellValue("v"+i);
+		}
+		final List<HouseRow> rows=provider.parseRows(wb);
+
+		Assert.assertEquals(3, rows.size());
+
+		for(int i=0;i<rows.size();++i){
+			Assert.assertEquals("k" + i, rows.get(i).getCells().get(0).getValue());
+			Assert.assertEquals("v" + i, rows.get(i).getCells().get(1).getValue());
+		}
 	}
 }

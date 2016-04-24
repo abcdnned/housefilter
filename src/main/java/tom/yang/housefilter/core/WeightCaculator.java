@@ -1,42 +1,34 @@
 package tom.yang.housefilter.core;
 
-import tom.yang.housefilter.rowfilter.WeightConfiguration;
-import tom.yang.tlog.Tlog;
+import java.util.List;
+
+import tom.yang.housefilter.condition.WeightCondition;
 
 public class WeightCaculator {
 
-	private final WeightConfiguration conf;
-
-	public WeightCaculator(final WeightConfiguration conf) {
-		if(conf==null){
-			throw new IllegalArgumentException("weight configuration can't be null.");
-		}
-		this.conf=conf;
-	}
-
-	public int caculatorRow(final HouseRow row){
-		if(row==null){
-			throw new IllegalArgumentException("cells can't be null");
-		}
-		if(conf.getWeights()==null){
-			return 0;
-		}
+	public int caculatorRow(List<WeightItem> wis, final HouseRow row) {
 		int result=0;
-		final StringBuilder log=new StringBuilder();
-		log.append(" row : ").append(row.getId());
-		for(final String cell:row.getCells()){
-			final CellWeight cellWeight = conf.getWeights().get(cell);
-			if(cellWeight==null){
-				continue;
-			}
-			if(cellWeight.getWc().match(row)){
-				final int w = cellWeight.getWeight();
-				result+=w;
-				log.append("cell : ").append(cell).append("weight : ").append(w);
+		for (WeightItem item : wis) {
+			List<HouseCell> cells = item.getSelector().selectCells(row);
+			for (HouseCell cell : cells) {
+				int w = item.getWeight().getWeight(cell);
+				boolean pass = true;
+				for (WeightCondition condition : item.getConditions()) {
+					ConditionContext context = new ConditionContext();
+					context.setWeight(w);
+					context.setCellValue(cell);
+					context.setColumnNum(cell.getCol());
+					context.setRow(row);
+					if (!condition.match(context)) {
+						pass = false;
+						break;
+					}
+				}
+				if (pass) {
+					result += w;
+				}
 			}
 		}
-		log.append("weight caculated ").append(result);
-		Tlog.fastLog(log.toString());
 		return result;
 	}
 }

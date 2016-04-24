@@ -1,7 +1,8 @@
 package tom.yang.housefilter.condition;
 
-import tom.yang.housefilter.core.HouseRow;
+import tom.yang.housefilter.core.ConditionContext;
 
 public interface WeightCondition {
-	boolean match(HouseRow rowContext);
+
+	boolean match(ConditionContext context);
 }
