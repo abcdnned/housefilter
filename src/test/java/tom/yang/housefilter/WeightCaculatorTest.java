@@ -13,10 +13,10 @@ import tom.yang.housefilter.condition.WeightCondition;
 import tom.yang.housefilter.core.ConditionContext;
 import tom.yang.housefilter.core.HouseCell;
 import tom.yang.housefilter.core.HouseRow;
-import tom.yang.housefilter.core.ICellSelector;
-import tom.yang.housefilter.core.ICellWeight;
 import tom.yang.housefilter.core.WeightCaculator;
 import tom.yang.housefilter.core.WeightItem;
+import tom.yang.housefilter.selector.ICellSelector;
+import tom.yang.housefilter.weight.ICellWeight;
 
 public class WeightCaculatorTest {
 

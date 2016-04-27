@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import tom.yang.housefilter.core.HouseCell;
 import tom.yang.housefilter.core.HouseRow;
-import tom.yang.housefilter.core.ICellSelector;
 import tom.yang.housefilter.util.RegUtils;
 
 public class RegNameSelector implements ICellSelector {

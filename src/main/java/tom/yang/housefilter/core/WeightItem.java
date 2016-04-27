@@ -3,6 +3,8 @@ package tom.yang.housefilter.core;
 import java.util.List;
 
 import tom.yang.housefilter.condition.WeightCondition;
+import tom.yang.housefilter.selector.ICellSelector;
+import tom.yang.housefilter.weight.ICellWeight;
 
 public class WeightItem {
 	private ICellSelector selector;
