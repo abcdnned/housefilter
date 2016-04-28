@@ -9,8 +9,7 @@ public class WeightCaculator {
 	public int caculatorRow(List<WeightItem> wis, final HouseRow row) {
 		int result=0;
 		for (WeightItem item : wis) {
-			List<HouseCell> cells = item.getSelector().selectCells(row);
-			for (HouseCell cell : cells) {
+			for (HouseCell cell : row.getCells()) {
 				int w = item.getWeight().getWeight(cell);
 				boolean pass = true;
 				for (WeightCondition condition : item.getConditions()) {

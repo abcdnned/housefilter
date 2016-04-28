@@ -9,7 +9,7 @@ public class FirstRowIndexFilter implements IHouseRowFilter {
 	@Override
 	public boolean filterHouseRow(final HouseRow row) {
 		if(row.getCells().size()>0){
-			final String string = row.getCells().get(0).getValue();
+			final String string = row.getCells().get(FIRST_ROW).getValue();
 			try{
 				final int id=Integer.valueOf(string);
 			}catch(final Throwable ignore){

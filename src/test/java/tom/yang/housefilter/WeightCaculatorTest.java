@@ -15,23 +15,10 @@ import tom.yang.housefilter.core.HouseCell;
 import tom.yang.housefilter.core.HouseRow;
 import tom.yang.housefilter.core.WeightCaculator;
 import tom.yang.housefilter.core.WeightItem;
-import tom.yang.housefilter.selector.ICellSelector;
 import tom.yang.housefilter.weight.ICellWeight;
 
 public class WeightCaculatorTest {
 
-	private class ABCSelector implements ICellSelector{
-
-		@Override
-		public List<HouseCell> selectCells(HouseRow row) {
-			List<HouseCell> s = new ArrayList<HouseCell>();
-			s.add(new HouseCell("a", 1));
-			s.add(new HouseCell("b", 2));
-			s.add(new HouseCell("c", 3));
-			return s;
-		}
-
-	}
 
 	private class AllRightCondition implements WeightCondition {
 
@@ -57,15 +44,16 @@ public class WeightCaculatorTest {
 	@Test
 	public void testNormal() {
 		HouseRow row = new HouseRow();
+		row.getCells().add(new HouseCell("a", 1));
+		row.getCells().add(new HouseCell("b", 2));
+		row.getCells().add(new HouseCell("c", 3));
 
 		List<WeightCondition> conditions = new ArrayList<WeightCondition>();
 		conditions.add(new AllRightCondition());
-		ICellSelector selector = new ABCSelector();
 		ICellWeight weight = new TenWeight();
 
 		WeightItem item = new WeightItem();
 		item.setConditions(conditions);
-		item.setSelector(selector);
 		item.setWeight(weight);
 		List<WeightItem> items = new ArrayList<WeightItem>();
 		items.add(item);
