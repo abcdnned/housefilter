@@ -20,6 +20,16 @@
 	</properties>
 	
 	<build>
+	<resources>
+      <resource>
+        <directory>C:\gitrepo\housefilter\src\main\resources</directory>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>C:\gitrepo\housefilter\src\test\resources</directory>
+      </testResource>
+    </testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
