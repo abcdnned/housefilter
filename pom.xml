@@ -22,12 +22,12 @@
 	<build>
 	<resources>
       <resource>
-        <directory>C:\gitrepo\housefilter\src\main\resources</directory>
+        <directory>src\main\resources</directory>
       </resource>
     </resources>
     <testResources>
       <testResource>
-        <directory>C:\gitrepo\housefilter\src\test\resources</directory>
+        <directory>src\test\resources</directory>
       </testResource>
     </testResources>
 		<plugins>
