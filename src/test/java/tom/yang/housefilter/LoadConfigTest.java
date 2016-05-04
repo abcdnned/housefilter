@@ -19,27 +19,27 @@ import tom.yang.housefilter.rowfilter.IHouseRowFilter;
 
 public class LoadConfigTest {
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-	@Test
-	public void testLoadRowFilter() throws FileNotFoundException, IOException {
-		ConfigLoader loader=new ConfigLoader();
-		File tf = new File(getClass().getResource("test.hf").getFile());
-		WeightConfig config = loader.load(tf);
-		List<IHouseRowFilter> filters = config.getFilters();
-		Assert.assertTrue(filters.stream().anyMatch(f -> (f instanceof FirstRowIndexFilter)));
-		Assert.assertTrue(filters.stream().anyMatch(f -> (f instanceof CellValueFilter)));
-	}
+    @Test
+    public void testLoadRowFilter() throws FileNotFoundException, IOException {
+        ConfigLoader loader=new ConfigLoader();
+        File tf = new File(getClass().getResource("test.hf").getFile());
+        WeightConfig config = loader.load(tf);
+        List<IHouseRowFilter> filters = config.getFilters();
+        Assert.assertTrue(filters.stream().anyMatch(f -> (f instanceof FirstRowIndexFilter)));
+        Assert.assertTrue(filters.stream().anyMatch(f -> (f instanceof CellValueFilter)));
+    }
 
-	@Test
-	public void testLoadWeightItem() {
+    @Test
+    public void testLoadWeightItem() {
 
-	}
+    }
 
-	@Test
-	public void testNull() {
+    @Test
+    public void testNull() {
 
-	}
+    }
 
 }
