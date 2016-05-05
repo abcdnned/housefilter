@@ -1,2 +1,4 @@
 FILTER FirstRowIndexFilter
-FILTER CellValueFilter(浜屾埧)
+FILTER CellValueFilter(二房)
+fdsafdas
+WEIGHT 500 IF HasCellValueCondition(浦江瑞和城),HasCellValueCondition(318弄6号)
