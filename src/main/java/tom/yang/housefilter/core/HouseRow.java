@@ -15,6 +15,10 @@ public class HouseRow {
 		return cells;
 	}
 
+	public void addCell(final String value){
+		cells.add(new HouseCell(value,cells.size()+1));
+	}
+
 	public String getId() {
 		return id;
 	}

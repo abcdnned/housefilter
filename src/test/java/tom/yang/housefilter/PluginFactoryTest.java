@@ -19,32 +19,32 @@ import tom.yang.housefilter.rowfilter.IHouseRowFilter;
 
 public class PluginFactoryTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
-    @Test
-    public void testCreateFirstRowFilter()
-            throws InstantiationException, IllegalAccessException, NoSuchMethodException,
-            SecurityException, IllegalArgumentException, InvocationTargetException {
-        IHouseRowFilter filter = PluginFactory.FILTER_FACTORY.create("FirstRowIndexFilter", null);
-        Assert.assertTrue(filter instanceof FirstRowIndexFilter);
-    }
+	@Test
+	public void testCreateFirstRowFilter()
+			throws InstantiationException, IllegalAccessException, NoSuchMethodException,
+			SecurityException, IllegalArgumentException, InvocationTargetException {
+		final IHouseRowFilter filter = PluginFactory.FILTER_FACTORY.create("FirstRowIndexFilter", null);
+		Assert.assertTrue(filter instanceof FirstRowIndexFilter);
+	}
 
-    @Test
-    public void testCreateHasCellValueCondition()
-            throws InstantiationException, IllegalAccessException, NoSuchMethodException,
-            SecurityException, IllegalArgumentException, InvocationTargetException {
-        WeightCondition condition = PluginFactory.CONDITION_FACTORY.create("HasCellValueCondition",
-                "condition");
-        Assert.assertTrue(condition instanceof HasCellValueCondition);
-        ConditionContext ctx = new ConditionContext();
-        HouseRow row = new HouseRow();
-        HouseCell cell = new HouseCell("condition", 1);
-        row.getCells().add(cell);
-        ctx.setRow(row);
+	@Test
+	public void testCreateHasCellValueCondition()
+			throws InstantiationException, IllegalAccessException, NoSuchMethodException,
+			SecurityException, IllegalArgumentException, InvocationTargetException {
+		final WeightCondition condition = PluginFactory.CONDITION_FACTORY.create("HasCellValueCondition",
+				"condition");
+		Assert.assertTrue(condition instanceof HasCellValueCondition);
+		final ConditionContext ctx = new ConditionContext();
+		final HouseRow row = new HouseRow();
+		final HouseCell cell = new HouseCell("condition", 1);
+		row.getCells().add(cell);
+		ctx.setRow(row);
 
-        Assert.assertTrue(condition.match(ctx));
-    }
+		Assert.assertTrue(condition.match(ctx));
+	}
 
 
 }

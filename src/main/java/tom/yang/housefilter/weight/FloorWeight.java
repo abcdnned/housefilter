@@ -1,6 +1,7 @@
 package tom.yang.housefilter.weight;
 
 import tom.yang.housefilter.core.HouseCell;
+import tom.yang.housefilter.util.HouseRowUtils;
 
 
 public class FloorWeight implements ICellWeight {
@@ -11,8 +12,8 @@ public class FloorWeight implements ICellWeight {
 
 	private int lowest = 0;
 
-	public FloorWeight(String arg) {
-		String[] args = arg.split(",");
+	public FloorWeight(final String arg) {
+		final String[] args = arg.split(",");
 		for (int i = 0; i < args.length; ++i) {
 			switch (i) {
 			case 0:
@@ -29,10 +30,13 @@ public class FloorWeight implements ICellWeight {
 	}
 
 	@Override
-	public int getWeight(HouseCell cell) {
-		int floor = Integer.valueOf(cell.getValue().substring(0, cell.getValue().indexOf('0')));
-		if (floor <= highest && floor >= lowest) {
-			return floor * factor;
+	public int getWeight(final HouseCell cell) {
+		try{
+			final int floor = HouseRowUtils.getFloor(cell.getValue());
+			if (floor <= highest && floor >= lowest) {
+				return floor * factor;
+			}
+		}catch(final Throwable ignore){
 		}
 		return 0;
 	}

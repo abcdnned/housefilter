@@ -28,17 +28,17 @@ public class LoadConfigTest {
 
 	@Test
 	public void testLoadRowFilter() throws FileNotFoundException, IOException {
-		ConfigLoader loader = new ConfigLoader();
-		File tf = new File(getClass().getResource("test.hf").getFile());
-		WeightConfig config = loader.load(tf);
-		List<IHouseRowFilter> filters = config.getFilters();
+		final ConfigLoader loader = new ConfigLoader();
+		final File tf = new File(getClass().getResource("test.hf").getFile());
+		final WeightConfig config = loader.load(tf);
+		final List<IHouseRowFilter> filters = config.getFilters();
 		Assert.assertTrue(filters.stream().anyMatch(f -> (f instanceof FirstRowIndexFilter)));
 		Assert.assertTrue(filters.stream().anyMatch(f -> (f instanceof CellValueFilter)));
 
-		HouseRow row = new HouseRow();
-		row.getCells().add(new HouseCell("¶þ·¿", 1));
+		final HouseRow row = new HouseRow();
+		row.getCells().add(new HouseCell("123", 1));
 
-		HouseRow wrongRow = new HouseRow();
+		final HouseRow wrongRow = new HouseRow();
 		wrongRow.getCells().add(new HouseCell("fdsafda", 1));
 
 		filters.forEach(f -> {
@@ -51,24 +51,24 @@ public class LoadConfigTest {
 
 	@Test
 	public void testLoadWeightItem() throws FileNotFoundException, IOException {
-		ConfigLoader loader = new ConfigLoader();
-		File tf = new File(getClass().getResource("test.hf").getFile());
-		WeightConfig config = loader.load(tf);
+		final ConfigLoader loader = new ConfigLoader();
+		final File tf = new File(getClass().getResource("test.hf").getFile());
+		final WeightConfig config = loader.load(tf);
 
-		List<WeightItem> items = config.getWeightItems();
+		final List<WeightItem> items = config.getWeightItems();
 		Assert.assertEquals(1, items.size());
 
-		WeightItem item = items.get(0);
+		final WeightItem item = items.get(0);
 		Assert.assertEquals(500, item.getWeight().getWeight(null));
 
-		List<WeightCondition> conditions = item.getConditions();
+		final List<WeightCondition> conditions = item.getConditions();
 		Assert.assertEquals(2, conditions.size());
 
 
-		HouseRow row = new HouseRow();
-		row.getCells().add(new HouseCell("318Åª6ºÅ", 1));
+		final HouseRow row = new HouseRow();
+		row.getCells().add(new HouseCell("123", 1));
 
-		ConditionContext ctx = new ConditionContext();
+		final ConditionContext ctx = new ConditionContext();
 		ctx.setRow(row);
 
 		Assert.assertTrue(conditions.get(0).match(ctx) || conditions.get(1).match(ctx));

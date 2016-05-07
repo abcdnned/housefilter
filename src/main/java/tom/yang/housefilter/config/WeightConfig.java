@@ -12,6 +12,16 @@ public class WeightConfig {
 
 	private List<WeightItem> weightItems = new ArrayList<WeightItem>();
 
+	private String[] head;
+
+	public String[] getHead() {
+		return head;
+	}
+
+	public void setHead(final String[] head) {
+		this.head = head;
+	}
+
 	public List<IHouseRowFilter> getFilters() {
 		return filters;
 	}
@@ -20,11 +30,11 @@ public class WeightConfig {
 		return weightItems;
 	}
 
-	public void setFilters(List<IHouseRowFilter> filters) {
+	public void setFilters(final List<IHouseRowFilter> filters) {
 		this.filters = filters;
 	}
 
-	public void setWeightItems(List<WeightItem> weightItems) {
+	public void setWeightItems(final List<WeightItem> weightItems) {
 		this.weightItems = weightItems;
 	}
 }

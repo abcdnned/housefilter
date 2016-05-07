@@ -49,17 +49,22 @@ public class RowProvider {
 				final HouseRow hr=new HouseRow();
 				for(final Cell cell:row){
 					cell.getColumnIndex();
-					HouseCell hc = new HouseCell();
+					final HouseCell hc = new HouseCell();
 					hc.setCol(cell.getColumnIndex());
-					hc.setValue(cell.getStringCellValue());
+					hc.setValue(getCellValue(cell));
 					hr.getCells().add(hc);
 				}
+				boolean add=true;
 				if(hr.getCells().size()>0){
 					if(filters.size()>0){
 						for(final IHouseRowFilter filter:filters){
-							if(filter.filterHouseRow(hr)){
-								result.add(hr);
+							if(!filter.filterHouseRow(hr)){
+								add=false;
+								break;
 							}
+						}
+						if(add){
+							result.add(hr);
 						}
 					}else{
 						result.add(hr);
@@ -68,6 +73,15 @@ public class RowProvider {
 			}
 		}
 		return result;
+	}
+
+	private String getCellValue(final Cell cell){
+		switch(cell.getCellType()){
+		case Cell.CELL_TYPE_NUMERIC:
+			return String.valueOf(cell.getNumericCellValue());
+		default:
+			return cell.getStringCellValue();
+		}
 	}
 
 }

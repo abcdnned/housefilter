@@ -9,22 +9,13 @@ import tom.yang.housefilter.core.HouseCell;
 import tom.yang.housefilter.core.HouseRow;
 
 public class HasCellValueConditionTest {
-	@Test
-	public void testEmpty(){
-		final String cellValue="condition";
-
-		ConditionContext context = new ConditionContext();
-
-		final HasCellValueCondition c=new HasCellValueCondition(cellValue);
-		Assert.assertFalse(c.match(context));
-	}
 
 	@Test
 	public void testNormal(){
 		final String cellValue="condition";
 
 		final HouseRow row=new HouseRow();
-		ConditionContext context=new ConditionContext();
+		final ConditionContext context=new ConditionContext();
 		context.setRow(row);
 
 		row.getCells().add(new HouseCell("value", 1));
@@ -39,7 +30,7 @@ public class HasCellValueConditionTest {
 
 		final HouseRow row=new HouseRow();
 		row.getCells().add(new HouseCell("rownfds", 1));
-		ConditionContext context = new ConditionContext();
+		final ConditionContext context = new ConditionContext();
 		context.setRow(row);
 
 		final HasCellValueCondition c=new HasCellValueCondition(cellValue);
