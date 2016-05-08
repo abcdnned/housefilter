@@ -35,7 +35,9 @@ public class PluginFactory<T> {
 	{
 		final Set<Class<? extends T>> types = reflections.getSubTypesOf(typeParameterClass);
 		for (final Class<? extends T> type : types) {
-			if (type.getName().endsWith(name)) {
+			String typeName = type.getName();
+			typeName = typeName.substring(typeName.lastIndexOf('.') + 1, typeName.length());
+			if (typeName.equals(name)) {
 				try {
 					if (arg != null) {
 						Constructor<? extends T> constructor;

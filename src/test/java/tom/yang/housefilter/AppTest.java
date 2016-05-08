@@ -9,6 +9,6 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class AppTest {
 	public static void main(final String[] args) throws EncryptedDocumentException, FileNotFoundException, InvalidFormatException, ParseException, IOException {
-		App.main(new String[]{"-o","D:/test/test.csv","-c","D:\\test\\conf.txt","-i","D:/test/in.xls"});
+		App.main(new String[] { "-o", "C:/test/test.csv", "-c", "C:/test/conf.txt", "-i", "C:/test/in.xls" });
 	}
 }
